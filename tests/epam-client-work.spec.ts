@@ -7,3 +7,15 @@ test.describe('EPAM client work navigation', () => {
     await page.goto(EPAM_URL);
     await page.waitForLoadState('domcontentloaded');
 
+    const servicesMenu = page.getByRole('link', { name: /^Services$/ });
+    await expect(servicesMenu).toBeVisible();
+    await servicesMenu.hover();
+
+    const clientWorkLink = page.getByRole('link', { name: /Explore Our Client Work/i });
+    await expect(clientWorkLink).toBeVisible();
+    await clientWorkLink.click();
+
+    await expect(page.getByText('Client Work', { exact: true })).toBeVisible();
+  });
+});
+
